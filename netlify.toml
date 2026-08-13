@@ -1,0 +1,6 @@
+[build]
+  publish = "public"
+  command = "node build-config.js"
+
+[build.environment]
+  NODE_VERSION = "20"

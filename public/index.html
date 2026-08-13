@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Titan VSA X — Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div id="topnav-root"></div>
+<div class="layout">
+  <div id="sidenav-root"></div>
+  <main>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:12px;">
+      <div>
+        <h1 class="headline-lg" id="page-title" style="margin:0;">XAUUSD <span style="color:var(--on-surface-variant); font-weight:400;">/ M15</span></h1>
+        <div class="data-mono" id="page-price" style="color:var(--primary); font-size:24px; margin-top:4px;">&mdash;</div>
+      </div>
+      <div id="status-pill-wrap"></div>
+    </div>
+
+    <div id="loading-banner" style="display:none;" class="empty-state">
+      <span class="spinner"></span> Running full analysis&hellip;
+    </div>
+    <div id="error-banner" style="display:none;" class="banner warn" style="margin-bottom:16px;"></div>
+
+    <div id="content" class="grid grid-12" style="display:none;">
+      <!-- Master verdict -->
+      <div class="col-8 panel panel-body" id="verdict-panel">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px;">
+          <div>
+            <div class="label-caps" style="margin-bottom:4px;">Final Verdict</div>
+            <div id="verdict-direction" class="headline-lg" style="font-size:40px;">&mdash;</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="label-caps" style="margin-bottom:4px;">Strength Score</div>
+            <div class="data-mono" style="font-size:32px;"><span id="verdict-strength">&mdash;</span><span style="font-size:16px; color:var(--on-surface-variant);">/100</span></div>
+          </div>
+        </div>
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap:32px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+              <span class="label-caps">Confidence</span>
+              <span class="data-mono" id="verdict-confidence">&mdash;</span>
+            </div>
+            <div class="progress-bg"><div class="progress-fill" id="confidence-bar" style="width:0%;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+              <span class="label-caps">Tradeability</span>
+              <span class="data-mono" id="verdict-tradeability">&mdash;</span>
+            </div>
+            <div class="progress-bg"><div class="progress-fill" id="tradeability-bar" style="width:0%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trade plan -->
+      <div class="col-4 panel panel-body">
+        <div class="label-caps" style="border-bottom:1px solid var(--panel-border); padding-bottom:8px; margin-bottom:16px;">Trade Plan</div>
+        <div id="trade-plan-body" style="display:flex; flex-direction:column; gap:12px;"></div>
+        <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--panel-border); display:flex; justify-content:space-between; align-items:center;">
+          <span class="label-caps">Risk : Reward</span>
+          <span class="data-mono" id="verdict-rr" style="font-size:18px; color:var(--primary);">&mdash;</span>
+        </div>
+      </div>
+
+      <!-- Engine confluence -->
+      <div class="col-12 panel">
+        <div class="panel-header">
+          <h2 class="headline-md" style="margin:0;">Engine Confluence</h2>
+          <span class="label-caps" id="active-nodes-count" style="color:var(--primary);">&mdash;</span>
+        </div>
+        <table class="tech-table">
+          <thead>
+            <tr><th>Engine</th><th>Direction</th><th>Contribution</th><th>Validation Status</th><th>Data Quality</th></tr>
+          </thead>
+          <tbody id="engine-table-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Data + risk footer -->
+      <div class="col-12 panel panel-body" style="display:flex; gap:32px; flex-wrap:wrap;">
+        <div><div class="label-caps">Data Source</div><div class="data-mono" id="footer-source">&mdash;</div></div>
+        <div><div class="label-caps">Volume Type</div><div class="data-mono" id="footer-volume-type">&mdash;</div></div>
+        <div><div class="label-caps">Risk / Trade</div><div class="data-mono" id="footer-risk-pct">&mdash;</div></div>
+        <div><div class="label-caps">Trades Today</div><div class="data-mono" id="footer-trades-today">&mdash;</div></div>
+      </div>
+    </div>
+
+    <div id="empty-state" class="empty-state">Click "Analyze All" to run a live analysis.</div>
+  </main>
+</div>
+
+<footer class="banner">
+  <span>Titan VSA X — TICK/estimated volume is not centralized true traded volume where noted.</span>
+  <span id="footer-version">MVP-2.0</span>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/command-center.js"></script>
+</body>
+</html>

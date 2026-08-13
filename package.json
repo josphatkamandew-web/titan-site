@@ -1,0 +1,8 @@
+{
+  "name": "titan-vsa-x-site",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build-config.js"
+  }
+}

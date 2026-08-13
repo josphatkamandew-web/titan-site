@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Titan VSA X — Validation Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div id="topnav-root"></div>
+<div class="layout">
+  <div id="sidenav-root"></div>
+  <main>
+    <h1 class="headline-lg" style="margin-top:0;">Validation Lab</h1>
+    <p style="color:var(--on-surface-variant); font-size:13px; margin-bottom:24px;">
+      No engine contributes to the live Fusion Engine until it has an out-of-sample backtest record here.
+      RETAIN = full weight, DE_EMPHASIZE = 40% weight, INVESTIGATE / REJECT = zero weight.
+    </p>
+
+    <div class="panel panel-body" style="margin-bottom:24px;">
+      <div class="label-caps" style="margin-bottom:16px;">Run a Backtest</div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="label-caps">Engine</label>
+          <select id="engine-select">
+            <option value="STRUCTURE">STRUCTURE</option>
+            <option value="LIQUIDITY_SWEEP">LIQUIDITY_SWEEP</option>
+            <option value="VSA">VSA</option>
+            <option value="REGIME">REGIME</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="label-caps">Timeframe</label>
+          <select id="bt-timeframe-select">
+            <option value="H4">H4</option>
+            <option value="H1">H1</option>
+            <option value="M15">M15</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="label-caps">Bars</label>
+          <input id="bars-input" type="number" value="5000" min="200" max="5000" />
+        </div>
+        <div class="form-field">
+          <label class="label-caps">Min Sample</label>
+          <input id="min-sample-input" type="number" value="100" min="10" max="1000" />
+        </div>
+        <button id="run-backtest-btn" class="primary-btn">Run Backtest</button>
+      </div>
+      <div id="backtest-result" style="display:none;" class="panel panel-body" style="margin-top:16px;"></div>
+      <div id="backtest-error" style="display:none;" class="banner warn"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="headline-md" style="margin:0;">Validation Status — <span id="vl-instrument"></span></h2>
+        <button id="refresh-status-btn" class="primary-btn">Refresh</button>
+      </div>
+      <table class="tech-table">
+        <thead>
+          <tr><th>Engine</th><th>Status</th><th>Sample Size</th><th>Win Rate</th><th>Expectancy (R)</th><th>Profit Factor</th><th>Reason</th></tr>
+        </thead>
+        <tbody id="status-table-body"></tbody>
+      </table>
+      <div id="status-empty" class="empty-state" style="display:none;">No backtests run yet for this instrument. Run one above.</div>
+    </div>
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/validation.js"></script>
+</body>
+</html>

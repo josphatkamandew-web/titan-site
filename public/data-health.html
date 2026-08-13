@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Titan VSA X — Data Health</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div id="topnav-root"></div>
+<div class="layout">
+  <div id="sidenav-root"></div>
+  <main>
+    <h1 class="headline-lg" style="margin-top:0;">Data Health — <span id="dh-instrument"></span></h1>
+
+    <div id="dh-error" style="display:none;" class="banner warn" style="margin-bottom:16px;"></div>
+
+    <div id="dh-content" class="grid grid-12">
+      <div class="col-8 panel panel-body">
+        <div class="label-caps" style="margin-bottom:12px;">Connection</div>
+        <div style="display:flex; gap:32px;">
+          <div><div class="label-caps">Source</div><div class="data-mono" id="dh-source">&mdash;</div></div>
+          <div><div class="label-caps">Volume Type</div><div class="data-mono" id="dh-volume-type">&mdash;</div></div>
+          <div><div class="label-caps">Data Quality</div><div class="data-mono" id="dh-quality">&mdash;</div></div>
+        </div>
+      </div>
+      <div class="col-4 panel panel-body" id="dh-verdict-panel" style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <div class="label-caps">System Verdict</div>
+        <div id="dh-verdict" class="headline-lg" style="margin-top:8px;">&mdash;</div>
+      </div>
+
+      <div class="col-12 panel">
+        <div class="panel-header"><h2 class="headline-md" style="margin:0;">Data Integrity Analysis</h2></div>
+        <table class="tech-table">
+          <tbody id="dh-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/data-health.js"></script>
+</body>
+</html>

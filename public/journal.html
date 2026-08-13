@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Titan VSA X — Trade Journal</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div id="topnav-root"></div>
+<div class="layout">
+  <div id="sidenav-root"></div>
+  <main>
+    <h1 class="headline-lg" style="margin-top:0;">Trade Journal — <span id="tj-instrument"></span></h1>
+
+    <div class="panel panel-body" style="margin-bottom:24px;">
+      <div class="label-caps" style="margin-bottom:16px;">Log a Trade</div>
+      <div class="form-row">
+        <div class="form-field"><label class="label-caps">Direction</label>
+          <select id="j-direction"><option>BULLISH</option><option>BEARISH</option></select>
+        </div>
+        <div class="form-field"><label class="label-caps">Entry</label><input id="j-entry" type="number" step="any" /></div>
+        <div class="form-field"><label class="label-caps">Stop</label><input id="j-stop" type="number" step="any" /></div>
+        <div class="form-field"><label class="label-caps">Target</label><input id="j-target" type="number" step="any" /></div>
+        <div class="form-field"><label class="label-caps">Result</label>
+          <select id="j-result"><option value="">— open —</option><option>WIN</option><option>LOSS</option><option>SCRATCH</option></select>
+        </div>
+        <div class="form-field"><label class="label-caps">R Multiple</label><input id="j-r" type="number" step="any" /></div>
+        <button id="log-trade-btn" class="primary-btn">Log Trade</button>
+      </div>
+      <div id="journal-error" style="display:none;" class="banner warn"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="headline-md" style="margin:0;">Journal Entries</h2>
+        <button id="refresh-journal-btn" class="primary-btn">Refresh</button>
+      </div>
+      <table class="tech-table">
+        <thead><tr><th>#</th><th>Timeframe</th><th>Direction</th><th>Entry</th><th>Stop</th><th>Target</th><th>Result</th><th>R</th></tr></thead>
+        <tbody id="journal-table-body"></tbody>
+      </table>
+      <div id="journal-empty" class="empty-state" style="display:none;">No trades logged yet for this instrument.</div>
+    </div>
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/journal.js"></script>
+</body>
+</html>
