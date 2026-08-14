@@ -21,32 +21,44 @@
     <div class="panel panel-body" style="margin-bottom:24px;">
       <div class="label-caps" style="margin-bottom:16px;">Run a Backtest</div>
       <div class="form-row">
-        <div class="form-field">
-          <label class="label-caps">Engine</label>
-          <select id="engine-select">
-            <option value="STRUCTURE">STRUCTURE</option>
-            <option value="LIQUIDITY_SWEEP">LIQUIDITY_SWEEP</option>
-            <option value="VSA">VSA</option>
-            <option value="REGIME">REGIME</option>
-          </select>
+        <button id="run-all-backtest-btn" class="primary-btn" style="background:var(--primary); color:var(--on-primary);">
+          Run All 4 Engines (1 fetch)
+        </button>
+        <span style="color:var(--on-surface-variant); font-size:12px; align-self:center;">
+          Recommended &mdash; fetches H1 data once, tests Structure + Liquidity Sweep + Regime + VSA together.
+        </span>
+      </div>
+      <div id="run-all-result" style="display:none; margin-top:12px;"></div>
+      <div style="border-top:1px solid var(--panel-border); margin:20px 0; padding-top:16px;">
+        <div class="label-caps" style="margin-bottom:12px; color:var(--on-surface-variant);">Or test one engine individually</div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="label-caps">Engine</label>
+            <select id="engine-select">
+              <option value="STRUCTURE">STRUCTURE</option>
+              <option value="LIQUIDITY_SWEEP">LIQUIDITY_SWEEP</option>
+              <option value="VSA">VSA</option>
+              <option value="REGIME">REGIME</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="label-caps">Timeframe</label>
+            <select id="bt-timeframe-select">
+              <option value="H1" selected>H1</option>
+              <option value="H4">H4</option>
+              <option value="M15">M15</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="label-caps">Bars</label>
+            <input id="bars-input" type="number" value="5000" min="200" max="5000" />
+          </div>
+          <div class="form-field">
+            <label class="label-caps">Min Sample</label>
+            <input id="min-sample-input" type="number" value="100" min="10" max="1000" />
+          </div>
+          <button id="run-backtest-btn" class="primary-btn">Run Backtest</button>
         </div>
-        <div class="form-field">
-          <label class="label-caps">Timeframe</label>
-          <select id="bt-timeframe-select">
-            <option value="H4">H4</option>
-            <option value="H1">H1</option>
-            <option value="M15">M15</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label class="label-caps">Bars</label>
-          <input id="bars-input" type="number" value="5000" min="200" max="5000" />
-        </div>
-        <div class="form-field">
-          <label class="label-caps">Min Sample</label>
-          <input id="min-sample-input" type="number" value="100" min="10" max="1000" />
-        </div>
-        <button id="run-backtest-btn" class="primary-btn">Run Backtest</button>
       </div>
       <div id="backtest-result" style="display:none;" class="panel panel-body" style="margin-top:16px;"></div>
       <div id="backtest-error" style="display:none;" class="banner warn"></div>

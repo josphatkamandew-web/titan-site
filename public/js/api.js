@@ -46,6 +46,8 @@ const Titan = (() => {
     getCalibration: (instrument) => request(`/calibration/${instrument}`),
     getBriefing: (instrument) => request(`/briefing/${instrument}`),
     getBriefingHistory: (instrument, limit = 14) => request(`/briefing-history/${instrument}?limit=${limit}`),
+    runBacktestAll: (instrument, body) =>
+      request(`/backtest-all/${instrument}`, { method: "POST", body: JSON.stringify(body) }),
     ApiError: TitanApiError,
   };
 })();

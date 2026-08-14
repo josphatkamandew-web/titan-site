@@ -80,7 +80,50 @@ async function runBacktest() {
   }
 }
 
+async function runAllBacktests() {
+  const instrument = TitanNav.getInstrument();
+  const btn = document.getElementById("run-all-backtest-btn");
+  const resultBox = document.getElementById("run-all-result");
+  const errorBox = document.getElementById("backtest-error");
+
+  btn.disabled = true;
+  btn.textContent = "Fetching H1 data once and testing all 4 engines (this can take a minute)…";
+  errorBox.style.display = "none";
+  resultBox.style.display = "none";
+
+  try {
+    const result = await Titan.runBacktestAll(instrument, { timeframe: "H1", bars: 5000, minimum_sample: 100 });
+    resultBox.style.display = "block";
+    const rows = Object.entries(result.results).map(([engine, r]) => {
+      const oos = r.out_of_sample.statistics;
+      return `
+        <tr>
+          <td>${engine}</td>
+          <td><span class="badge ${badgeClass(r.promoted_status)}">${r.promoted_status}</span></td>
+          <td class="numeric">${r.total_trades_all_history}</td>
+          <td class="numeric">${oos.sample_size ?? 0}</td>
+          <td class="numeric">${oos.win_rate_percent ?? "&mdash;"}${oos.win_rate_percent != null ? "%" : ""}</td>
+          <td class="numeric">${oos.expectancy_r ?? "&mdash;"}</td>
+        </tr>`;
+    }).join("");
+    resultBox.innerHTML = `
+      <div class="label-caps" style="margin-bottom:8px;">${instrument} / H1 &mdash; ${result.bars_fetched} bars fetched once, 4 engines tested</div>
+      <table class="tech-table">
+        <thead><tr><th>Engine</th><th>Status</th><th>Total Trades</th><th>OOS Sample</th><th>Win Rate</th><th>Expectancy (R)</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+    await loadStatuses();
+  } catch (err) {
+    errorBox.style.display = "block";
+    errorBox.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Run All 4 Engines (1 fetch)";
+  }
+}
+
 document.getElementById("run-backtest-btn").addEventListener("click", runBacktest);
+document.getElementById("run-all-backtest-btn").addEventListener("click", runAllBacktests);
 document.getElementById("refresh-status-btn").addEventListener("click", loadStatuses);
 document.addEventListener("titan:context-change", loadStatuses);
 document.addEventListener("titan:analyze-clicked", loadStatuses);

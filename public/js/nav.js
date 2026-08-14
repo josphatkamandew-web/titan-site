@@ -18,7 +18,7 @@ const TitanNav = (() => {
     return localStorage.getItem("titan_instrument") || "XAUUSD";
   }
   function getTimeframe() {
-    return localStorage.getItem("titan_timeframe") || "M15";
+    return localStorage.getItem("titan_timeframe") || "H1";
   }
   function setInstrument(v) {
     localStorage.setItem("titan_instrument", v);
