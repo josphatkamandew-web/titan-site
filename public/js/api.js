@@ -44,6 +44,8 @@ const Titan = (() => {
     postJournal: (entry) => request(`/journal`, { method: "POST", body: JSON.stringify(entry) }),
     getJournal: (instrument) => request(`/journal?instrument=${instrument}`),
     getCalibration: (instrument) => request(`/calibration/${instrument}`),
+    getBriefing: (instrument) => request(`/briefing/${instrument}`),
+    getBriefingHistory: (instrument, limit = 14) => request(`/briefing-history/${instrument}?limit=${limit}`),
     ApiError: TitanApiError,
   };
 })();

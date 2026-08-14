@@ -8,6 +8,7 @@ const TitanNav = (() => {
 
   const PAGES = [
     { href: "index.html", icon: "CC", label: "Command Center" },
+    { href: "briefing.html", icon: "MB", label: "Morning Briefing" },
     { href: "validation.html", icon: "VL", label: "Validation Lab" },
     { href: "journal.html", icon: "TJ", label: "Trade Journal" },
     { href: "data-health.html", icon: "DH", label: "Data Health" },
