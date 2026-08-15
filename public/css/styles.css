@@ -57,15 +57,28 @@ a { color: inherit; text-decoration: none; }
 /* ---------- Top nav ---------- */
 .topnav {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0 24px; height: 64px; background: var(--surface);
+  padding: 0 24px; min-height: 64px; background: var(--surface);
   border-bottom: 1px solid var(--outline-variant); position: sticky; top: 0; z-index: 50;
+  flex-wrap: wrap; gap: 12px; row-gap: 8px;
 }
-.topnav-left { display: flex; align-items: center; gap: 24px; }
-.topnav-title { font-weight: 700; }
+.topnav-left { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.topnav-title { font-weight: 700; white-space: nowrap; }
 .topnav-tabs { display: flex; gap: 24px; }
 .topnav-tabs a { color: var(--on-surface-variant); font-size: 15px; }
 .topnav-tabs a.active, .topnav-tabs a:hover { color: var(--on-surface); }
-.topnav-right { display: flex; align-items: center; gap: 16px; }
+.topnav-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.nav-toggle-btn {
+  display: none;
+  background: var(--surface-container); color: var(--on-surface); border: 1px solid var(--outline-variant);
+  border-radius: 4px; width: 36px; height: 36px; font-size: 18px; cursor: pointer; flex-shrink: 0;
+}
+
+.nav-scrim {
+  display: none;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90;
+}
+.nav-scrim.open { display: block; }
 
 .status-pill {
   font-family: var(--font-mono); font-size: 12px; padding: 4px 12px;
@@ -160,3 +173,21 @@ table.tech-table td.numeric { text-align: right; font-family: var(--font-mono); 
   border-top-color: var(--primary); border-radius: 50%; animation: spin 0.7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Mobile: collapsible sidenav ---------- */
+@media (max-width: 900px) {
+  .nav-toggle-btn { display: block; }
+
+  .sidenav {
+    position: fixed; top: 0; left: 0; height: 100vh; z-index: 95;
+    transform: translateX(-100%); transition: transform 0.2s ease-out;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.4);
+  }
+  .sidenav.open { transform: translateX(0); }
+
+  main { padding: 16px; width: 100%; }
+  .layout { position: relative; }
+
+  .topnav-title { font-size: 16px; }
+  select { max-width: 110px; }
+}

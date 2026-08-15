@@ -40,6 +40,7 @@ const TitanNav = (() => {
     topRoot.innerHTML = `
       <nav class="topnav">
         <div class="topnav-left">
+          <button id="nav-toggle-btn" class="nav-toggle-btn" aria-label="Toggle menu">&#9776;</button>
           <div class="topnav-title">Titan VSA X</div>
           <select id="instrument-select">
             ${INSTRUMENTS.map((i) => `<option value="${i}" ${i === instrument ? "selected" : ""}>${i}</option>`).join("")}
@@ -56,7 +57,8 @@ const TitanNav = (() => {
     `;
 
     sideRoot.innerHTML = `
-      <aside class="sidenav">
+      <div id="nav-scrim" class="nav-scrim"></div>
+      <aside class="sidenav" id="sidenav-el">
         ${PAGES.map(
           (p) => `<a href="${p.href}" class="${p.href === activePage ? "active" : ""}">${p.label}</a>`
         ).join("")}
@@ -68,6 +70,17 @@ const TitanNav = (() => {
     document.getElementById("analyze-all-btn").addEventListener("click", () => {
       document.dispatchEvent(new CustomEvent("titan:analyze-clicked"));
     });
+
+    const sidenavEl = document.getElementById("sidenav-el");
+    const scrimEl = document.getElementById("nav-scrim");
+    const toggleBtn = document.getElementById("nav-toggle-btn");
+    const openNav = () => { sidenavEl.classList.add("open"); scrimEl.classList.add("open"); };
+    const closeNav = () => { sidenavEl.classList.remove("open"); scrimEl.classList.remove("open"); };
+    toggleBtn.addEventListener("click", () => {
+      sidenavEl.classList.contains("open") ? closeNav() : openNav();
+    });
+    scrimEl.addEventListener("click", closeNav);
+    sidenavEl.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
 
     checkBackend();
   }
