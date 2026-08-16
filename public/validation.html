@@ -25,7 +25,7 @@
           Run All 4 Engines (1 fetch)
         </button>
         <span style="color:var(--on-surface-variant); font-size:12px; align-self:center;">
-          Recommended &mdash; fetches H1 data once, tests Structure + Liquidity Sweep + Regime + VSA together.
+          Recommended &mdash; pulls ~1 year of H1 history (auto-paginated), tests Structure + Liquidity Sweep + Regime + VSA together with confluence filtering.
         </span>
       </div>
       <div id="run-all-result" style="display:none; margin-top:12px;"></div>
@@ -51,7 +51,8 @@
           </div>
           <div class="form-field">
             <label class="label-caps">Bars</label>
-            <input id="bars-input" type="number" value="5000" min="200" max="5000" />
+            <input id="bars-input" type="number" value="8000" min="200" max="15000" />
+            <span style="font-size:11px; color:var(--on-surface-variant);">&gt;5000 auto-paginates</span>
           </div>
           <div class="form-field">
             <label class="label-caps">Min Sample</label>

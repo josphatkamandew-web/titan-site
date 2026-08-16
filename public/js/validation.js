@@ -92,7 +92,7 @@ async function runAllBacktests() {
   resultBox.style.display = "none";
 
   try {
-    const result = await Titan.runBacktestAll(instrument, { timeframe: "H1", bars: 5000, minimum_sample: 100 });
+    const result = await Titan.runBacktestAll(instrument, { timeframe: "H1", bars: 8760, minimum_sample: 100 });
     resultBox.style.display = "block";
     const rows = Object.entries(result.results).map(([engine, r]) => {
       const oos = r.out_of_sample.statistics;
